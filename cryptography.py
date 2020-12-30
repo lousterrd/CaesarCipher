@@ -68,27 +68,29 @@ def isPhrase(phrase):
     return True
 
 
+def main(): 
+    isBrute = False
+    choice = raw_input("Would you like to encrypt (e) or decrypt (d)? ")
 
-isBrute = False
-choice = input("Would you like to encrypt (e) or decrypt (d)? ")
+    print ("If you do not have a valid key and want to use a brute force approach, enter -1 as the key.")
+    key = int(raw_input("Please enter a key between 1 and 26: "))
 
-print ("If you do not have a valid key and want to use a brute force approach, enter -1 as the key.")
-key = int(input("Please enter a key between 1 and 26: "))
-
-if key > 26 or key < -1:
-    print ("Sorry, you did not choose a valid option.")
-if key == -1:
-    isBrute = True
-
-else:
-    if choice == "encrypt" or choice == 'e':
-        phrase = input ("Please enter a phrase to encrypt: ")
-        print (encrypt(phrase, key))
-    elif choice == "decrypt" or choice == 'd':
-        phrase = input ("Please enter a phrase to decrypt: ")
-        if isBrute:
-            bruteforce(phrase)
-        else:
-            print (decrypt(phrase, key))
-    else:
+    if key > 26 or key < -1:
         print ("Sorry, you did not choose a valid option.")
+    
+
+    else:
+        if key == -1:
+            isBrute = True
+        if choice == "encrypt" or choice == 'e':
+            phrase = raw_input ("Please enter a phrase to encrypt: ")
+            print (encrypt(phrase, key))
+        elif choice == "decrypt" or choice == 'd':
+            phrase = raw_input ("Please enter a phrase to decrypt: ")
+            if isBrute:
+                bruteforce(phrase)
+            else:
+                print (decrypt(phrase, key))
+        else:
+            print ("Sorry, you did not choose a valid option.")
+
