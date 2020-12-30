@@ -64,20 +64,21 @@ def isPhrase(phrase):
     phrase = phrase.split()
     for word in phrase:
         if not(dict.check(word)):
-            #print ("not a phrase")
             return False
-    #print("full english")
     return True
 
 
 
-
+isBrute = False
 choice = input("Would you like to encrypt (e) or decrypt (d)? ")
 
+print ("If you do not have a valid key and want to use a brute force approach, enter -1 as the key.")
 key = int(input("Please enter a key between 1 and 26: "))
 
-if key > 26 or key < 1:
+if key > 26 or key < -1:
     print ("Sorry, you did not choose a valid option.")
+if key == -1:
+    isBrute = True
 
 else:
     if choice == "encrypt" or choice == 'e':
@@ -85,6 +86,9 @@ else:
         print (encrypt(phrase, key))
     elif choice == "decrypt" or choice == 'd':
         phrase = input ("Please enter a phrase to decrypt: ")
-        print (decrypt(phrase, key))
+        if isBrute:
+            bruteforce(phrase)
+        else:
+            print (decrypt(phrase, key))
     else:
         print ("Sorry, you did not choose a valid option.")
